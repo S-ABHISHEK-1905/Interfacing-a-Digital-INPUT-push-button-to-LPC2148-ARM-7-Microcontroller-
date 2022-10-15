@@ -1,13 +1,14 @@
 # Interfacing-a-Digital-INPUT-push-button-to-LPC2148-ARM-7-Microcontroller-
-Name :
-Roll no 
-Date of experiment :
+Name : S.ABHISHEK
+Roll no : 212221230002
+Date of experiment : 10/15/2022
 
 Ex. No. : 3
-Date: 
+Date: 10/15/2022
  
 ### Aim: To Interface a Digital input (pushbutton ) to LPC2148 ARM 7 and write a code to switch on and of an LED 
 Components required: Proteus ISIS professional suite, Kiel μ vision 5 Development environment 
+
 ### Theory 
 The full form of an ARM is an advanced reduced instruction set computer (RISC) machine, and it is a 32-bit processor architecture expanded by ARM holdings. The applications of an ARM processor include several microcontrollers as well as processors. The architecture of an ARM processor was licensed by many corporations for designing ARM processor-based SoC products and CPUs. This allows the corporations to manufacture their products using ARM architecture. Likewise, all main semiconductor companies will make ARM-based SOCs such as Samsung, Atmel, TI etc.
 
@@ -116,13 +117,41 @@ Step 9: Select the hex file from the Kiel program folder and import the program 
 
 
 ### Kiel - Program  
+~~~
+#include <LPC214x.h>   // define LPC2148 Header file
+#define led (1<<2)     // led macro for pin 2 of port0
+#define sw (1<<10)     // sw macro for pin 10 of port0
+int main(void)
+{
+	unsigned int x;
+	IO0DIR|=(~sw);   // configure P1.24 - P1.31 as input
+	IO0DIR|=led;     // configure P1.16 - P1.23 as output
+	while(1)
+	{
+		x = IOPIN0 & sw;   //save status of sw in variable x
+		if(x==sw)          // if switch open
+		{
+			IOCLR0|=led; // LED off
+		}
+		else               // if switch close
+		{
+			IOSET0 = led;  // LED on
+		}
+	}
+}
+~~~
 
+
+
+### Output screen shots :
+#### LED ON
+![image](https://user-images.githubusercontent.com/66360846/195973221-a1eb2f9a-e954-4da1-bbcd-205b45806340.png)
+
+#### CIRCUIT DIAGRAM
+![image](https://user-images.githubusercontent.com/66360846/195973282-d486ac1a-e7b1-4ebf-85bd-08a7130d5530.png)
 
 ### Result :
 Interfacing a digital output with ARM microcontroller is executed 
-
-### Output screen shots :
-
 
 
 
